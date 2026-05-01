@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"name": "wwWorld",
+			"path": "."
+		},
+		{
+			"name": "wildwest-framework",
+			"path": "counties/wildwest-ai/wildwest-framework"
+		},
+		{
+			"name": "wildwest-vscode",
+			"path": "counties/wildwest-ai/wildwest-vscode"
+		},
+		{
+			"name": "nx-icouponads",
+			"path": "counties/icouponads/nx-icouponads"
+		},
+		{
+			"name": "wooqb",
+			"path": "counties/wpicity/wooqb"
+		},
+		{
+			"name": "frontier",
+			"path": "frontier"
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"**/node_modules": true,
+			"**/.git": true
+		},
+		"search.exclude": {
+			"**/node_modules": true,
+			"**/dist": true,
+			"**/build": true,
+			"**/.wildwest/worktrees": true
+		}
+	}
+}

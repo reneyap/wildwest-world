@@ -1,0 +1,18 @@
+# County repos — each is its own git repo
+counties/
+
+# Frontier — pre-Wild West projects, mixed git status
+frontier/
+
+# Session exports — local operational
+sessions/
+
+# World registry — local only (contains local paths; not for sharing)
+.wildwest/registry.json
+
+# Operational .wildwest artifacts — local only
+.wildwest/telegraph/
+.wildwest/.last-beat
+
+# macOS
+.DS_Store
