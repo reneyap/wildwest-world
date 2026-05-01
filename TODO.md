@@ -10,6 +10,19 @@
 | Item | Notes |
 |---|---|
 | Create `wildwest-ai/wildwest-world` on GitHub | Template/reference world instance for the framework org. Do after `reneyap/wildwest-world` is stable and the structure is proven. `wildwest-ai/wildwest-world` = canonical example; `reneyap/wildwest-world` = live instance. |
+| wwTrust SSOT — `~/wildwest/.wildwest/trust-policy.json` | Create world-scope trust-policy.json. World rules: `setopt`, `printf`, `mv`, `git worktree`, `.wildwest/scripts/activate-branch.sh`. Cascade: county + town extend/revoke. Sync script writes projection → `.code-workspace` autoApprove. ICA county entry: `vercel`. Deferred — do after ICA feature pressure subsides. |
+
+---
+
+## nx-icouponads wwTown Migration — Deferred
+
+> Deferred 2026-05-01 — product time pressure. Activate as `chore/wwtownmigration` in a gap between feature branches.
+
+| Item | Notes |
+|---|---|
+| Move wwLifecycle scripts | `scripts/activate-branch.sh`, `retire-branch.sh`, etc. → `.wildwest/scripts/`. Update all callers and branch docs. |
+| Audit `.wildwest/` layout | Align to canonical wwGovernance spec (wildwest-directory-spec.md). Remove/relocate Cowboy Era artifacts. |
+| Update autoApprove paths | `nx-icouponads.code-workspace` autoApprove: update paths to `.wildwest/scripts/` after script migration. Interim fix until wwTrust SSOT + sync script is built. |
 
 ---
 
