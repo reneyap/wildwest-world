@@ -398,3 +398,56 @@ This TODO.md is the handoff doc — memory rebuilds from here.
 6. Update CLAUDE.md files, workspace files, scripts — replace `~/counties/` with `~/wildwest/counties/`
 7. Delete `~/counties/` original once confident
 8. Then: nx-icouponads onboarding (`_heartbeat` worktree + board)
+
+---
+
+## wwFramework Gaps — Discovered 2026-05-01 (Bottom-Up ICA Restart)
+
+> Source: First strictly-compliant wwFramework session in wwTown(nx-icouponads). Gaps surfaced by attempting to follow the framework exactly before writing any code.
+
+### Gap 1 — TM-Absent Protocol Undefined
+
+**Level:** wwFramework (spec)
+
+**What happened:** CD(RSn) opened in CPT to work on `feat/profile-prompts-on-profile`. Per strict wwFramework, `activate-branch.sh` is TM(RHk) territory — CD cannot run it. No TM window was open. Framework has no documented protocol for this scenario.
+
+**Options not specified in framework:**
+- S(R) designates CD as acting TM for session duration
+- S(R) opens a separate RHk window (proper separation)
+- S(R) authorizes CD to run activation as one-off exception
+
+**Action needed:** wwFramework spec must document the TM-absent fallback protocol. Add to `wildwest-framework/docs/` or role CHARTERs.
+
+---
+
+### Gap 2 — No Role-Channel Enforcement
+
+**Level:** wwFramework (spec) + wwVscode (tooling)
+
+**What happened:** Nothing technically prevents CD(RSn) in CPT from running `activate-branch.sh` or writing implementation code. The framework relies entirely on actor discipline. No enforcement mechanism exists.
+
+**Spec action:** Clarify in CHARTER.md for CD and TM that role violations are self-policed; document the expected enforcement model (honor system vs. tooling).
+
+**wwVscode action:** Design role-awareness feature — extension knows which devPair opened the workspace (declared at session start or via `.wildwest/registry.json` active session) and can warn when an actor attempts an out-of-role action (e.g., CD running a TM lifecycle script).
+
+---
+
+### Gap 3 — CD Role Boundary at Town Level
+
+**Level:** wwFramework (spec)
+
+**What happened:** CD(RSn) was operating inside `wwTown(nx-icouponads)` for strategic observation. Framework says CD is county-level, visits towns only to: approve scope, review PRs, make strategic decisions. But no spec language defines what "visiting" looks like operationally — which tools CD can touch, which directories CD can read vs. write.
+
+**Action needed:** Add "CD town visit protocol" to CD CHARTER.md — what CD may read/write/run during a town visit, and what is off-limits.
+
+---
+
+### Gap 4 — Stale `active/` Doc After Merge (TM Retirement Failure Mode)
+
+**Level:** wwTown(ICA) + wwVscode (tooling)
+
+**What happened:** `docs/branches/active/feat/champion-capture-flow/README.md` still exists despite the branch being merged (`merged/feat/champion-capture-flow` on remote). TM retirement protocol was not completed.
+
+**wwTown(ICA) action:** Add to `chore/wwtownmigration` scope — audit and clean all stale `active/` docs.
+
+**wwVscode action:** Add board integrity check — detect `active/` docs whose corresponding git branch exists only under `merged/` or `remotes/origin/merged/`. Surface as a warning in status bar or telegraph.
