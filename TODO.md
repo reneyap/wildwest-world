@@ -5,6 +5,14 @@
 
 ---
 
+## World Repo — Open Items
+
+| Item | Notes |
+|---|---|
+| Create `wildwest-ai/wildwest-world` on GitHub | Template/reference world instance for the framework org. Do after `reneyap/wildwest-world` is stable and the structure is proven. `wildwest-ai/wildwest-world` = canonical example; `reneyap/wildwest-world` = live instance. |
+
+---
+
 ## nx-icouponads Onboarding — Findings & Open Questions
 
 > Survey conducted 2026-04-30. Town is the only active Cowboy Era town; onboarding to Wild West is the priority.
