@@ -8,6 +8,7 @@ frontier/
 sessions/
 
 .wildwest/.last-beat
+.wildwest/telegraph/.last-beat
 
 # macOS
 .DS_Store
