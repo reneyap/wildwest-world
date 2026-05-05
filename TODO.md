@@ -1,9 +1,7 @@
-<!-- updated: 20260505-0151Z (21:51 EDT) -->
-
 # Wild West — TODO
 
 > **Created:** 2026-04-30 12:17 UTC
-> **Last updated:** 2026-05-05 01:51Z
+> **Last updated:** 20260505-0151Z (21:51 EDT)
 > **Scope:** Cross-county planning — not committed to any repo
 
 ---

@@ -1,6 +1,6 @@
-<!-- updated: 20260505-0151Z (21:51 EDT) -->
-
 # wildwest — wwWorld Root
+
+> **Last updated:** 20260505-0151Z (21:51 EDT)
 
 `~/wildwest/` is the single trunk for the entire Wild West world on this machine.
 One world, one root. Everything Wild West lives here.

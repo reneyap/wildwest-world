@@ -1,7 +1,6 @@
-<!-- updated: 20260505-0151Z (21:51 EDT) -->
-
 # Wild West — DONE
 
+> **Last updated:** 20260505-0151Z (21:51 EDT)
 > **Scope:** Cross-county completed work and architectural decisions  
 > **Not committed to any repo**
 
