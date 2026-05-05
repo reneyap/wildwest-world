@@ -106,6 +106,8 @@
 |---|---|
 | **Create `wildwest-ai/wildwest-world` on GitHub** | Template/reference world instance. Do after `reneyap/wildwest-world` is stable and structure is proven. |
 | **wwTrust SSOT — `~/wildwest/.wildwest/trust-policy.json`** | World-scope trust-policy.json. Cascade: county + town extend/revoke. Sync script writes projection → `.code-workspace` autoApprove. Deferred — do after ICA feature pressure subsides. |
+| **Public release prep (wildwest-framework)** | Review pass, MIT license, wildwest-county template repo, CONTRIBUTING.md. Prerequisite for `wildwest-ai/wildwest-world` on GitHub. |
+| **Frontier onboarding** | `agentic-handbook`, `devflow`, `teamgpt` identified as candidates in `~/wildwest/frontier/`. Many others unclassified (`nx-teststream`, `nx-tictactoe`, etc.). No timeline — do in a gap between active county work. |
 
 ---
 
@@ -139,6 +141,16 @@
 | **Write CLAUDE.md at wildwest-vscode town level** | TM(RHk).Cpt needs handoff context. Minimum: town scope, role, telegraph rules, board path. Interim fix — superseded once `TownInit.ts` scaffolds CLAUDE.md from template. |
 | **T3 exploration fork in SoloModeController** | `getTier()` is assessment-only. T3 (fork creation at `explore/<branch>--<reason>--<date>`) is the core solo mode value proposition. |
 | **`TownInit.ts`: scaffold `CLAUDE.md` from template** | Depends on `CLAUDE.town.md` template in wildwest-framework. Eliminates cold-start briefing gap for all towns bootstrapped by initTown. |
+| **Registry validator utility** | `validateRegistry()` — validates registry.json shape, detects stale paths, confirms wwuid format. Recommended by TM during isolation probe (2026-05-02). Deferred at the time. |
+| **Model identity gap in staged sessions** | No canonical capture of which model ran a given session. Current best proxy: Copilot `thinking` field often contains model self-declaration (e.g. `"Claude Haiku 4.5"`). Needs a proper model identity field in the staged schema. Affects all three tools. |
+
+### Backlog
+
+| Item | Detail |
+|---|---|
+| **Command palette split** | Separate "Wild West: Sessions" and "Wild West: Governance" command categories in `package.json`. UX only — no functional change. |
+| **MCP integration** | Migrate `.wildwest/` artifacts to an MCP server; expose `sendMessage`, `readTelegraph`, `reportHeartbeat`. Enables cross-machine and remote-scope operations. Long-term architectural direction. |
+| **Role-awareness warning** | Extension should know which devPair opened the workspace and warn when an actor attempts an out-of-role action (e.g. CD running a TM lifecycle script). Tooling complement to the framework honor-system model. |
 
 ### Telegraph Visibility — Multi-Scope Badge
 
