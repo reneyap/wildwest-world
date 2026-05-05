@@ -1,6 +1,6 @@
 # wildwest — wwWorld Root
 
-> **Last updated:** 20260505-0210Z (22:10 EDT)
+> **Last updated:** 20260505-0213Z (22:13 EDT)
 
 `~/wildwest/` is a governed instance of [wildwest-framework](counties/wildwest-ai/wildwest-framework/).
 One world, one root. Everything Wild West lives here.
@@ -36,7 +36,7 @@ counties/
   icouponads/
     nx-icouponads/            ← iCouponAds platform (active; Cowboy Era, onboarding deferred)
   visibleteam/
-    vscode-auto-chat-export/  ← directory present; not yet a governed town
+    vscode-auto-chat-export/  ← retired
   wpicity/
     wooqb/                    ← directory present; not yet a governed town
 ```
