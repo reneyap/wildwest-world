@@ -1,7 +1,7 @@
 # Wild West — TODO
 
 > **Created:** 2026-04-30 12:17 UTC
-> **Last updated:** 20260505-0242Z (22:42 EDT)
+> **Last updated:** 20260505-1720Z (13:20 EDT)
 > **Scope:** Cross-county planning — not committed to any repo
 
 ---
@@ -108,6 +108,7 @@
 | Item | Detail |
 |---|---|
 | **Instantiate RA (Ranger) role** | RA is the world-scope operator — right hand to G, world equivalent of CD. Not yet instantiated. Needs: devPair assignment, CHARTER reference, entry in world registry, world CLAUDE.md section. |
+| **Codify RA approval authority for territory-wide products** | Decided 2026-05-05 (session `d5ed111c`): ww-vscode is a territory-wide product (affects all counties + towns) → merges require RA approval, not just CD. Codify in: RA CHARTER, wildwest-ai county CLAUDE.md, wildwest-vscode CLAUDE.md. |
 | **World CLAUDE.md** | `~/wildwest/CLAUDE.md` — world-scope law and cold-start context for any actor operating at world scope. Equivalent of county CLAUDE.md one level up. Should cover: G/RA roles, world registry, county map, telegraph rules at world scope. |
 | **Update world registry with G/RA identity** | `~/wildwest/.wildwest/registry.json` currently has no `governor` or `ranger` fields. Add world-scope actor entries consistent with the full authority gradient. |
 | **Spec: G county list = G's authority relationships** | Codify in framework spec: a world instance's county list = counties where G holds authority. Not framework-defined. Different world instances have different counties. |
@@ -128,12 +129,11 @@
 
 ### wwTerritory Rename — Remaining
 
-> Framework docs updated 2026-05-05. Code + registry still pending.
+> Framework docs updated 2026-05-05. Code + registry complete 2026-05-05.
 
 | Item | Detail |
 |---|---|
-| **`HeartbeatMonitor.beatWorld()` → `beatTerritory()`** | Rename method + all internal `scope === "world"` checks → `"territory"` |
-| **`scope: "world"` → `"territory"` in world registry** | `~/wildwest/.wildwest/registry.json` `scope` field needs updating |
+
 | **`wwWorld` → `wwTerritory` in MEMORY.md** | Update project memory actor model and terminology sections |
 | **wildwest-vscode `SoloModeController` / `WorktreeManager`** | Audit for any hardcoded `"world"` scope references |
 | **wildwest-ai county CLAUDE.md** | References `~/counties/` paths and may use `wwWorld` — audit + update |
@@ -148,18 +148,14 @@
 | 2 | **Add `scope: "town"` to `.wildwest/registry.json`** | Bootstrapped without `scope`. Without it, extension falls back to `.wildwest/scripts/` presence — own town not canonically detected. |
 | 3 | **Fix `TownInit.ts` — write `scope` field** | `initTown` writes `{wwuid, alias, remote, mcp}` but omits `scope: "town"`. Every future town bootstrapped by initTown will have the same gap. Depends on identity block shape decision. |
 
-### World Root Configurability
 
-> Decided 2026-05-03. Required for Option A (registry path removal) and framework portability. Memo sent to TM(RHk).Cpt: `20260503-1233Z-CD-to-TM--registry-path-removal-and-world-root-config.md`
 
-| # | Item | Detail |
-|---|---|---|
-| 1 | **Add `wildwest.worldRoot` VSCode setting** | Default `~/wildwest`. Passed into HeartbeatMonitor + sessionExporter as constructor param. |
-| 2 | **Add `wildwest.countiesDir` VSCode setting** | Default `counties`. Relative to worldRoot. Used to derive county + town paths. |
-| 3 | **Add `wildwest.sessionsDir` VSCode setting** | Default `sessions`. Relative to worldRoot. Used by sessionExporter output path. |
-| 4 | **Update `HeartbeatMonitor.beatCounty()`** | Replace `t.path` read with `path.join(worldRoot, countiesDir, countyAlias, t.alias)` |
-| 5 | **Update `HeartbeatMonitor.beatTerritory()`** | Rename from `beatWorld()`; replace `c.path` read with `path.join(worldRoot, countiesDir, c.alias)` |
-| 6 | **Remove `path` fields from territory + county registries** | After extension ships the setting; territory + county registries committed as instance artifacts. |
+### Session Export Pipeline — Post v0.14.0
+
+| Item | Detail |
+|---|---|
+| **Clean up legacy staged/*.json flat files** | 260 old flat session files remain in `staged/` alongside new `packets/` + `storage/`. Verify backfill complete, then delete. |
+| **Confirm 183-duplicate export bug resolved** | Session `7c4dfc56` (May 3) exported 183 identical packets — confirmed bug (session `3ecc35f4`). Verify v0.14.0 delta pipeline resolves duplication, or open `fix/session-export-dedup`. |
 
 ### Actor Display — Registry-Driven
 

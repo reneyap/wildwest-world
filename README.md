@@ -1,4 +1,4 @@
-# wildwest — wwWorld Root
+# wildwest — wwTerritory Root
 
 > **Last updated:** 20260505-0213Z (22:13 EDT)
 
@@ -52,8 +52,8 @@ The same pattern repeats at every scope — identity, registry, governance conte
 Authority flows outward → inward. Context cascades inward → outward.
 
 ```
-~/wildwest/                              ← wwWorld   (.wildwest/registry.json)
-  counties/<county>/                     ← County    (.wildwest/registry.json)
+~/wildwest/                              ← wwTerritory   (.wildwest/registry.json)
+  counties/<county>/                     ← County        (.wildwest/registry.json)
     <town>/                              ← Town      (.wildwest/registry.json)
       .wildwest/                         ← town governance domain
         board/        ← branch lifecycle (planned/ active/ merged/ abandoned/)

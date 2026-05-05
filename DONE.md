@@ -1,8 +1,41 @@
 # Wild West — DONE
 
-> **Last updated:** 20260505-0151Z (21:51 EDT)
+> **Last updated:** 20260505-1720Z (13:20 EDT)
 > **Scope:** Cross-county completed work and architectural decisions  
 > **Not committed to any repo**
+
+---
+
+## feat/session-export-pipeline — v0.14.0 Shipped ✓ 2026-05-05
+
+Delta pipeline designed by RA (session `3ecc35f4`) and implemented by TM(ww-vscode) as PR #1. Merged and shipped as v0.14.0. Pipeline confirmed working:
+- `staged/packets/` — 144 delta packets (wwsid-keyed, seq-indexed)
+- `staged/storage/index.json` — 134 sessions indexed across all tools
+- `staged/storage/sessions/` — 135 per-session detail files
+- Packet shape: `schema_version`, `wwsid`, `tool`, `actor`, `device_id`, `seq_from/seq_to`, `turns`
+- Storage index shape: `schema_version`, `updated_at`, `sessions[]` with `tool`, `tool_sid`, `project_path`, `created_at`
+- Note: legacy flat `staged/*.json` files (260) remain alongside new structure — cleanup is a separate open item
+
+---
+
+## wwTerritory Rename — wildwest-vscode Code Complete ✓ 2026-05-05
+
+All three pending code items confirmed complete as of v0.14.0:
+- `HeartbeatMonitor.beatWorld()` already `beatTerritory()` + `'territory'` scope
+- World registry `"scope"` field already `"territory"` in `~/wildwest/.wildwest/registry.json`
+- README.md + package.json description + HeartbeatMonitor log updated this session (uncommitted)
+
+---
+
+## World Root Configurability — v0.11.0 ✓ 2026-05-05
+
+All 6 items shipped in v0.11.0 (current: v0.14.0). Confirmed working:
+1. `wildwest.worldRoot` VSCode setting (default `~/wildwest`)
+2. `wildwest.countiesDir` VSCode setting (default `counties`)
+3. `wildwest.sessionsDir` VSCode setting (default `sessions`)
+4. `HeartbeatMonitor.beatCounty()` — uses worldRoot + countiesDir path derivation
+5. `HeartbeatMonitor.beatTerritory()` — renamed from `beatWorld()`
+6. `path` fields removed from territory + county registries
 
 ---
 
