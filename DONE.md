@@ -1,3 +1,5 @@
+<!-- updated: 20260505-0151Z (21:51 EDT) -->
+
 # Wild West — DONE
 
 > **Scope:** Cross-county completed work and architectural decisions  

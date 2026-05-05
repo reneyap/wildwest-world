@@ -1,7 +1,9 @@
+<!-- updated: 20260505-0151Z (21:51 EDT) -->
+
 # Wild West — TODO
 
 > **Created:** 2026-04-30 12:17 UTC
-> **Last updated:** 2026-05-05 01:19Z (reorganized by area)
+> **Last updated:** 2026-05-05 01:51Z
 > **Scope:** Cross-county planning — not committed to any repo
 
 ---
@@ -100,6 +102,15 @@
 | `docs/branches/` | repo root | 5-state lifecycle: drafts/planned/active/merged/abandoned |
 | `scripts/` | repo root | Lifecycle scripts: `plan-branch.sh`, `activate-branch.sh`, etc. |
 
+### World-Scope Governance
+
+| Item | Detail |
+|---|---|
+| **Instantiate RA (Ranger) role** | RA is the world-scope operator — right hand to G, world equivalent of CD. Not yet instantiated. Needs: devPair assignment, CHARTER reference, entry in world registry, world CLAUDE.md section. |
+| **World CLAUDE.md** | `~/wildwest/CLAUDE.md` — world-scope law and cold-start context for any actor operating at world scope. Equivalent of county CLAUDE.md one level up. Should cover: G/RA roles, world registry, county map, telegraph rules at world scope. |
+| **Update world registry with G/RA identity** | `~/wildwest/.wildwest/registry.json` currently has no `governor` or `ranger` fields. Add world-scope actor entries consistent with the full authority gradient. |
+| **Spec: G county list = G's authority relationships** | Codify in framework spec: a world instance's county list = counties where G holds authority. Not framework-defined. Different world instances have different counties. |
+
 ### Deferred — World Repo
 
 | Item | Notes |
@@ -108,6 +119,7 @@
 | **wwTrust SSOT — `~/wildwest/.wildwest/trust-policy.json`** | World-scope trust-policy.json. Cascade: county + town extend/revoke. Sync script writes projection → `.code-workspace` autoApprove. Deferred — do after ICA feature pressure subsides. |
 | **Public release prep (wildwest-framework)** | Review pass, MIT license, wildwest-county template repo, CONTRIBUTING.md. Prerequisite for `wildwest-ai/wildwest-world` on GitHub. |
 | **Frontier onboarding** | `agentic-handbook`, `devflow`, `teamgpt` identified as candidates in `~/wildwest/frontier/`. Many others unclassified (`nx-teststream`, `nx-tictactoe`, etc.). No timeline — do in a gap between active county work. |
+| **wwMCP federation** | When implemented: each world instance exposes a G endpoint over MCP. Multiple G instances federate cross-machine without shared filesystem. `mcp: null` in all registries is the placeholder. |
 
 ---
 
