@@ -5,6 +5,12 @@
 
 ---
 
+## World Registry Commit Decision ✓ 2026-05-05
+
+Registry committed at all scopes (world, county, town) for committed instances. wwWorld is an instance of wildwest-framework — its `.wildwest/registry.json` is a governance artifact, not a machine-local index. "World gitignored" assumption was pre-instance-model and is superseded. `.last-beat` sentinels remain gitignored (runtime-only). Framework spec should codify: gitignore only if the world root is purely local and not a versioned instance.
+
+---
+
 ## TODO.md Reorganization + Doc Cleanup ✓ 2026-05-05
 
 | Item | Resolution |

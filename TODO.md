@@ -26,7 +26,7 @@
 |---|---|---|
 | **Identity block shape** | A) Flat — `scope`, `wwuid`, `alias`, `remote`, `mcp` at top level (ICA town style) vs. B) Wrapped — `"identity": { wwuid, alias, remote, mcp }` (county template style). Currently mixed: county template uses B; ICA town uses A; wildwest-vscode registry.json uses partial-A. | Town registry template; `TownInit.ts` fix |
 | **`heartbeat.sh` fate in framework `scripts/`** | Retire (delete or archive) vs. annotate as deprecated vs. replace with lifecycle script templates | Framework `scripts/` cleanup |
-| **Registry `path` fields + gitignore policy** | **Decided: Option A** — remove `path` fields from world + county registries; derive paths from `alias` + world root + counties dir; world gitignored, county + town committed. Requires `HeartbeatMonitor.ts` changes + new VSCode settings. | County registry commit status; federation readiness |
+| **Registry `path` fields + gitignore policy** | **Decided: Option A + instance clarification** — remove `path` fields from world + county registries; derive paths from `alias` + world root + counties dir. Registry committed at all scopes (world, county, town) for committed instances — world registry is a governance artifact, not a machine-local index. "World gitignored" assumption was pre-instance-model and is superseded. Gitignore only `.last-beat` sentinels (runtime-only). Requires `HeartbeatMonitor.ts` changes + new VSCode settings. | County registry commit status; federation readiness |
 
 ---
 
