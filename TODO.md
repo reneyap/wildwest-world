@@ -1,7 +1,7 @@
 # Wild West — TODO
 
 > **Created:** 2026-04-30 12:17 UTC
-> **Last updated:** 20260505-1720Z (13:20 EDT)
+> **Last updated:** 20260505-2004Z (16:04 EDT)
 > **Scope:** Cross-county planning — not committed to any repo
 
 ---
@@ -12,11 +12,9 @@
 
 | # | Item | Area | Why Now |
 |---|---|---|---|
-| 1 | **Resolve identity block shape** | Open Decision | Blocking town registry template + `TownInit.ts` fix |
-| 2 | **`feat/actor-scope-display`** | wildwest-vscode | Scope determines valid roles → gates everything: solo mode, commands, status bar |
-| 3 | **Add `scope: "town"` to wildwest-vscode `.wildwest/registry.json`** | wildwest-vscode | Prerequisite for actor-scope-display; own town not canonically detected without it |
-| 4 | **Fix `SoloModeController.hasBranchDoc()` path** | wildwest-vscode | T2 solo mode fully broken — unblock after actor-scope-display lands |
-| 5 | **Fix `TownInit.ts` — write `scope` field** | wildwest-vscode | Depends on #1; every future town bootstrapped by initTown has the gap |
+| 1 | **`feat/actor-scope-display`** | wildwest-vscode | Scope determines valid roles → gates everything: solo mode, commands, status bar |
+| 2 | **Fix `SoloModeController.hasBranchDoc()` path** | wildwest-vscode | T2 solo mode fully broken — unblock after actor-scope-display lands |
+| 3 | **Fix `TownInit.ts` — write `scope` field** | wildwest-vscode | Shape decision resolved (flat A, 2026-05-05); every future town bootstrapped by initTown has the gap |
 
 ---
 
@@ -24,9 +22,7 @@
 
 | Decision | Options | Blocker For |
 |---|---|---|
-| **Identity block shape** | A) Flat — `scope`, `wwuid`, `alias`, `remote`, `mcp` at top level (ICA town style) vs. B) Wrapped — `"identity": { wwuid, alias, remote, mcp }` (county template style). Currently mixed: county template uses B; ICA town uses A; wildwest-vscode registry.json uses partial-A. | Town registry template; `TownInit.ts` fix |
 | **`heartbeat.sh` fate in framework `scripts/`** | Retire (delete or archive) vs. annotate as deprecated vs. replace with lifecycle script templates | Framework `scripts/` cleanup |
-| **Registry `path` fields + gitignore policy** | **Decided: Option A + instance clarification** — remove `path` fields from world + county registries; derive paths from `alias` + world root + counties dir. Registry committed at all scopes (world, county, town) for committed instances — world registry is a governance artifact, not a machine-local index. "World gitignored" assumption was pre-instance-model and is superseded. Gitignore only `.last-beat` sentinels (runtime-only). Requires `HeartbeatMonitor.ts` changes + new VSCode settings. | County registry commit status; federation readiness |
 
 ---
 

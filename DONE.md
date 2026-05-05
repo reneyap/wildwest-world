@@ -1,8 +1,62 @@
 # Wild West — DONE
 
-> **Last updated:** 20260505-1720Z (13:20 EDT)
+> **Last updated:** 20260505-2004Z (16:04 EDT)
 > **Scope:** Cross-county completed work and architectural decisions  
 > **Not committed to any repo**
+
+---
+
+## Registry schema_version 2 migration — all 8 scopes ✓ 2026-05-05
+
+Migrated all registry.json files in the wwTerritory tree from schema_version 1 (mixed/implicit) to schema_version 2 (flat A identity block). All 8 committed.
+
+**Schema_version 2 shape (flat A — canonical):**
+- `scope`, `schema_version: "2"`, `_schema_note` at top
+- `wwuid` (UUID v4), `alias`, `remote`, `mcp: null` flat at top level — no `identity: {}` wrapper
+- `path` field dropped from all town entries (derived from config)
+- `county` field dropped (use `alias`)
+- `github_remote` renamed to `remote`
+
+**Committed at each repo:**
+| Repo | Commit | Change |
+|---|---|---|
+| territory `wildwest` | `c4180bb` | Added wwuid `4cc9535c`, alias, remote, mcp; fixed framework URL |
+| county `wildwest-ai` | `cafe2d6` | Added wwuid `279ffd91`; flattened identity; renamed towns.name→alias |
+| county `icouponads` | `3688deb` | Added wwuid `1839bba0`; flattened identity |
+| county `visibleteam` | `0c8feb7` | Added wwuid `f6044155`; flattened identity |
+| county `wpicity` | `1120586` | Added wwuid `454fe2bb`; flattened identity |
+| `wildwest-framework` | `7de8198` | Template: flattened identity block; placeholder `<UUID-v4>` preserved |
+| `wildwest-vscode` | `cda280d` | Added schema_version, _schema_note; wwuid `83b09a8d` pre-existing |
+| `nx-icouponads` | `686caa98` | Added wwuid `b5825464`, alias, remote, mcp; fixed updated_by |
+
+**Canonical wwuids assigned (permanent):**
+- territory `wildwest`: `4cc9535c-ecd4-492b-8dd6-794b34fd08a1`
+- county `wildwest-ai`: `279ffd91-425b-4f1e-a0f5-cb4dc431db4b`
+- county `icouponads`: `1839bba0-711a-410f-9b23-c7f512ea3e46`
+- county `visibleteam`: `f6044155-2b05-4a8e-b203-6ccbfecff8e4`
+- county `wpicity`: `454fe2bb-c338-4772-936d-fee8809281d4`
+- town `wildwest-vscode`: `83b09a8d-6587-46bb-9e98-880d56db39b2` (pre-existing)
+- town `nx-icouponads`: `b5825464-661a-4b2f-85a6-7419aa4154e3`
+
+**nx-icouponads status:** committed locally on main; push requires branch+PR per ICA standing rules (rule 2). TM-push path available (`.wildwest/` is TM territory) — awaiting direction.
+
+---
+
+## Identity block shape decision — flat A ✓ 2026-05-05
+
+**Decided:** Flat A. `wwuid`, `alias`, `remote`, `mcp` at top level — no `identity: {}` wrapper.
+
+**Reasoning:** `scope` is already flat (primary discriminator), `identity` wrapper buys nothing (fields read individually), flat is living practice (ICA town style), template should follow real towns not vice versa. `identity: {}` wrapper was only in the county registry template; ICA and wildwest-vscode already used flat A.
+
+**Implemented:** all 8 registry.json files migrated to flat A (see schema_version 2 migration above).
+
+---
+
+## Registry `path` fields + gitignore policy — DECIDED ✓ 2026-05-05
+
+**Decision:** Option A + instance clarification — remove `path` fields from world + county registries; derive paths from `alias` + world root + counties dir (convention-based, no `path` in registry). Registry committed at all scopes (world, county, town) for committed instances — world registry is a governance artifact, not a machine-local index. "World gitignored" assumption was pre-instance-model and is superseded. Gitignore only `.last-beat` sentinels (runtime-only).
+
+**Implemented in:** v0.11.0 (`HeartbeatMonitor.ts` + new VSCode settings). All `path` fields removed from registries in schema_version 2 migration.
 
 ---
 
