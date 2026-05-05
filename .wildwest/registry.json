@@ -1,33 +1,37 @@
 {
   "scope": "territory",
   "schema_version": "2",
-  "_schema_note": "v2: no 'path' fields (derived from alias + worldRoot config); 'name' renamed to 'alias'",
-  "framework": "wildwest-framework",
-  "last_updated": "2026-05-03T14:02Z",
-  "updated_by": "TM(RHk)",
+  "_schema_note": "v2: no 'path' fields (derived from alias + worldRoot config); use 'alias' in all scopes",
+  "wwuid": "4cc9535c-ecd4-492b-8dd6-794b34fd08a1",
+  "alias": "wildwest",
+  "remote": null,
+  "mcp": null,
+  "framework": "https://github.com/wildwest-ai/wildwest-framework",
+  "last_updated": "2026-05-05T19:53Z",
+  "updated_by": "RA(RSn)",
   "counties": [
     {
       "alias": "wildwest-ai",
       "sheriff": "R",
-      "github_remote": "https://github.com/wildwest-ai/wildwest-county.git",
+      "remote": "https://github.com/wildwest-ai/wildwest-county.git",
       "status": "active"
     },
     {
       "alias": "icouponads",
       "sheriff": "R",
-      "github_remote": "https://github.com/iCouponAds/wildwest-county.git",
+      "remote": "https://github.com/iCouponAds/wildwest-county.git",
       "status": "active"
     },
     {
       "alias": "visibleteam",
       "sheriff": "R",
-      "github_remote": "https://github.com/visibleteam/wildwest-county.git",
+      "remote": "https://github.com/visibleteam/wildwest-county.git",
       "status": "active"
     },
     {
       "alias": "wpicity",
       "sheriff": "R",
-      "github_remote": "https://github.com/WPicity/wildwest-county.git",
+      "remote": "https://github.com/WPicity/wildwest-county.git",
       "status": "active"
     }
   ]
