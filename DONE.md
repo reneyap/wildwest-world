@@ -6,6 +6,14 @@
 
 ---
 
+## wwWorld → wwTerritory Rename ✓ 2026-05-05
+
+Governor governs a Territory — the Wild West analogy term and role name are inseparable. `wwWorld` was misleading (implies absolute top; role at that level is Governor, not "World"). `Territory` was already in `background.md` but incorrectly tied to Sheriff (county scope). Corrected to Governor.
+
+**Scope of change:** `wwTerritory` replaces `wwWorld` in all framework docs; scope enum `"world"` → `"territory"` in registry discriminator; `background.md` Territory definition fixed; `mcp.md` multi-territory model updated. **Still pending:** wildwest-vscode code (`HeartbeatMonitor.beatWorld()` → `beatTerritory()`, `scope === "world"` checks), world registry `"scope"` field, MEMORY.md.
+
+---
+
 ## World Registry Commit Decision ✓ 2026-05-05
 
 Registry committed at all scopes (world, county, town) for committed instances. wwWorld is an instance of wildwest-framework — its `.wildwest/registry.json` is a governance artifact, not a machine-local index. "World gitignored" assumption was pre-instance-model and is superseded. `.last-beat` sentinels remain gitignored (runtime-only). Framework spec should codify: gitignore only if the world root is purely local and not a versioned instance.

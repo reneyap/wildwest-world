@@ -1,7 +1,7 @@
 # Wild West — TODO
 
 > **Created:** 2026-04-30 12:17 UTC
-> **Last updated:** 20260505-0224Z (22:24 EDT)
+> **Last updated:** 20260505-0242Z (22:42 EDT)
 > **Scope:** Cross-county planning — not committed to any repo
 
 ---
@@ -126,6 +126,20 @@
 
 ## wildwest-vscode
 
+### wwTerritory Rename — Remaining
+
+> Framework docs updated 2026-05-05. Code + registry still pending.
+
+| Item | Detail |
+|---|---|
+| **`HeartbeatMonitor.beatWorld()` → `beatTerritory()`** | Rename method + all internal `scope === "world"` checks → `"territory"` |
+| **`scope: "world"` → `"territory"` in world registry** | `~/wildwest/.wildwest/registry.json` `scope` field needs updating |
+| **`wwWorld` → `wwTerritory` in MEMORY.md** | Update project memory actor model and terminology sections |
+| **wildwest-vscode `SoloModeController` / `WorktreeManager`** | Audit for any hardcoded `"world"` scope references |
+| **wildwest-ai county CLAUDE.md** | References `~/counties/` paths and may use `wwWorld` — audit + update |
+
+---
+
 ### Immediate — Blocking Framework Behavior
 
 | # | Item | Detail |
@@ -144,8 +158,8 @@
 | 2 | **Add `wildwest.countiesDir` VSCode setting** | Default `counties`. Relative to worldRoot. Used to derive county + town paths. |
 | 3 | **Add `wildwest.sessionsDir` VSCode setting** | Default `sessions`. Relative to worldRoot. Used by sessionExporter output path. |
 | 4 | **Update `HeartbeatMonitor.beatCounty()`** | Replace `t.path` read with `path.join(worldRoot, countiesDir, countyAlias, t.alias)` |
-| 5 | **Update `HeartbeatMonitor.beatWorld()`** | Replace `c.path` read with `path.join(worldRoot, countiesDir, c.alias)` |
-| 6 | **Remove `path` fields from world + county registries** | After extension ships the setting; world registry stays gitignored; county registry becomes committable. |
+| 5 | **Update `HeartbeatMonitor.beatTerritory()`** | Rename from `beatWorld()`; replace `c.path` read with `path.join(worldRoot, countiesDir, c.alias)` |
+| 6 | **Remove `path` fields from territory + county registries** | After extension ships the setting; territory + county registries committed as instance artifacts. |
 
 ### Actor Display — Registry-Driven
 
