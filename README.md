@@ -1,8 +1,8 @@
 # wildwest — wwWorld Root
 
-> **Last updated:** 20260505-0151Z (21:51 EDT)
+> **Last updated:** 20260505-0210Z (22:10 EDT)
 
-`~/wildwest/` is the single trunk for the entire Wild West world on this machine.
+`~/wildwest/` is a governed instance of [wildwest-framework](counties/wildwest-ai/wildwest-framework/).
 One world, one root. Everything Wild West lives here.
 
 ---
@@ -16,7 +16,8 @@ One world, one root. Everything Wild West lives here.
 | `sessions/` | Session exporter output — all actors, all towns |
 | `docs/` | World-scope reference docs and session observations |
 | `archive/` | Stale snapshots retained for historical reference |
-| `TODO.md` | Cross-county open items — not committed to any single repo |
+| `.wildwest/` | World governance domain — registry, telegraph |
+| `TODO.md` | Cross-county open items |
 | `DONE.md` | Cross-county completed work and architectural decisions |
 | `wildwest.code-workspace` | Multi-root VSCode workspace — all active towns |
 | `README.md` | This file |
@@ -51,7 +52,7 @@ The same pattern repeats at every scope — identity, registry, governance conte
 Authority flows outward → inward. Context cascades inward → outward.
 
 ```
-~/wildwest/                              ← wwWorld   (.wildwest/registry.json — target)
+~/wildwest/                              ← wwWorld   (.wildwest/registry.json)
   counties/<county>/                     ← County    (.wildwest/registry.json)
     <town>/                              ← Town      (.wildwest/registry.json)
       .wildwest/                         ← town governance domain
@@ -68,12 +69,16 @@ Authority flows outward → inward. Context cascades inward → outward.
 
 | Actor | Role | Scope |
 |---|---|---|
-| S(R) — reneyap | Sheriff | World / all counties |
+| G(R) — reneyap | Governor | World — all counties report up |
+| RA — TBD | Ranger | World — operator; right hand to G |
+| S(R) — reneyap | Sheriff | County — sole authority per county |
 | CD(RSn) — reneyap + Sonnet | Chief Deputy | County — PR gate, scope decisions |
 | TM(RHk) — reneyap + Haiku | Town Marshal | Town — branch lifecycle, telegraph |
 | HGs | Hired Guns | Impl only; no standing authority |
 
-**devPair** = human author code + model code (e.g. `RSn`, `RHk`). Not pair programming. Not Copilot. Human author is accountable for all output.
+**Note:** In this single-developer instance G(R) = S(R) = reneyap — same person, different scope hats.
+
+**devPair** = human author code + model code (e.g. `RSn`, `RHk`). Not pair programming. Human author is accountable for all output.
 
 ---
 
