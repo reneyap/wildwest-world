@@ -1,7 +1,7 @@
 # Wild West — TODO
 
 > **Created:** 2026-04-30 12:17 UTC
-> **Last updated:** 20260505-0216Z (22:16 EDT)
+> **Last updated:** 20260505-0219Z (22:19 EDT)
 > **Scope:** Cross-county planning — not committed to any repo
 
 ---
@@ -65,7 +65,7 @@
 
 | Item | Detail |
 |---|---|
-| **Session ID self-awareness gap (Claude Code)** | Copilot: session ID present in `VSCODE_TARGET_SESSION_LOG` template variable at session start. Claude Code: session ID not surfaced to the model — must `ls -t ~/.claude/projects/<project>/*.jsonl` to infer current session. Cold-start protocol for `.Cld` windows should include this lookup step. |
+| **Session ID self-awareness gap (Claude Code)** | Copilot: session ID present in `VSCODE_TARGET_SESSION_LOG` template variable at session start. Claude Code: session ID not surfaced to the model — must look it up. Add to `.Cld` cold-start protocol: (1) `ls -t ~/.claude/projects/<project>/*.jsonl \| head -1` to get session file; (2) read first line for `timestamp` field to get session start time; (3) declare tool, model, version, session ID, and start time before any work. |
 | **`session-continuity.md` is not scope-aware** | Protocol written from town scope perspective. A `.Cld` session can operate at world, county, or multi-town scope. Branch lifecycle rules differ by scope — need explicit per-scope rules. |
 | **Multi-town session protocol undefined** | When CD operates at world/county scope and touches multiple town repos in one session, no protocol defines: whether to branch per-town-touched, how to sequence commits across repos, or how session dumps reference cross-repo work. |
 | **World/county scope branch rules** | Town scope: branch lifecycle (plan/activate/retire). World/county scope: coordination artifacts (`TODO.md`, `DONE.md`, session dumps). Current working assumption: no branch needed at world root for coordination artifacts; branch per-town when making town changes within a world-scope session. Needs codification. |
