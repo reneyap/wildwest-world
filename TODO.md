@@ -134,8 +134,6 @@
 | Item | Detail |
 |---|---|
 
-| **`wwWorld` → `wwTerritory` in MEMORY.md** | Update project memory actor model and terminology sections |
-| **wildwest-vscode `SoloModeController` / `WorktreeManager`** | Audit for any hardcoded `"world"` scope references |
 | **wildwest-ai county CLAUDE.md** | References `~/counties/` paths and may use `wwWorld` — audit + update |
 
 ---

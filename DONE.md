@@ -43,7 +43,7 @@ All 6 items shipped in v0.11.0 (current: v0.14.0). Confirmed working:
 
 Governor governs a Territory — the Wild West analogy term and role name are inseparable. `wwWorld` was misleading (implies absolute top; role at that level is Governor, not "World"). `Territory` was already in `background.md` but incorrectly tied to Sheriff (county scope). Corrected to Governor.
 
-**Scope of change:** `wwTerritory` replaces `wwWorld` in all framework docs; scope enum `"world"` → `"territory"` in registry discriminator; `background.md` Territory definition fixed; `mcp.md` multi-territory model updated. **Still pending:** wildwest-vscode code (`HeartbeatMonitor.beatWorld()` → `beatTerritory()`, `scope === "world"` checks), world registry `"scope"` field, MEMORY.md.
+**Scope of change:** `wwTerritory` replaces `wwWorld` in all framework docs; scope enum `"world"` → `"territory"` in registry discriminator; `background.md` Territory definition fixed; `mcp.md` multi-territory model updated. **All items resolved 2026-05-05:** wildwest-vscode code (HeartbeatMonitor, package.json description, comments), world registry `"scope"` field (v0.11.0), MEMORY.md (repo memory updated), SoloModeController/WorktreeManager audit (no hardcoded `"world"` scope strings found).
 
 ---
 
