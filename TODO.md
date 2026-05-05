@@ -1,7 +1,7 @@
 # Wild West — TODO
 
 > **Created:** 2026-04-30 12:17 UTC
-> **Last updated:** 20260505-0151Z (21:51 EDT)
+> **Last updated:** 20260505-0216Z (22:16 EDT)
 > **Scope:** Cross-county planning — not committed to any repo
 
 ---
@@ -36,8 +36,8 @@
 
 | Item | Detail |
 |---|---|
-| **Add cold-start checklist to wildwest-framework CLAUDE.md** | wildwest-vscode CLAUDE.md has section 3 (Cold-Start Checklist). wildwest-framework CLAUDE.md has no equivalent. Any actor opening that workspace starts blind. |
-| **CLAUDE.town.md template must include cold-start section** | Every town CLAUDE.md scaffolded by `TownInit.ts` must include a Copilot cold-start checklist. Without it, cold-start failure is the default for every new town. |
+| **Add cold-start checklist to wildwest-framework CLAUDE.md** | **Higher priority than originally assessed.** Confirmed 2026-05-05 (session 56af1546): Copilot auto-injects CLAUDE.md as a workspace attachment at session start — TM reads it automatically, without manual handoff. A cold-start checklist IN CLAUDE.md is therefore auto-surfaced to every new TM window. Without it, TM starts with framework context but no cold-start procedure. |
+| **CLAUDE.town.md template must include cold-start section** | Every town CLAUDE.md scaffolded by `TownInit.ts` must include a Copilot cold-start checklist. Auto-attachment means the checklist will be surfaced automatically — makes this a zero-friction cold-start mechanism. |
 
 ### Spec & Templates
 
@@ -61,8 +61,11 @@
 
 ### Session Continuity Gaps
 
+> Key finding 2026-05-05 (session 56af1546 + 7c4dfc56): Copilot has session ID in template variables at turn 0 — self-aware from the start. Claude Code session ID exists on disk (`~/.claude/projects/.../*.jsonl`) but is NOT injected into context — must be looked up manually.
+
 | Item | Detail |
 |---|---|
+| **Session ID self-awareness gap (Claude Code)** | Copilot: session ID present in `VSCODE_TARGET_SESSION_LOG` template variable at session start. Claude Code: session ID not surfaced to the model — must `ls -t ~/.claude/projects/<project>/*.jsonl` to infer current session. Cold-start protocol for `.Cld` windows should include this lookup step. |
 | **`session-continuity.md` is not scope-aware** | Protocol written from town scope perspective. A `.Cld` session can operate at world, county, or multi-town scope. Branch lifecycle rules differ by scope — need explicit per-scope rules. |
 | **Multi-town session protocol undefined** | When CD operates at world/county scope and touches multiple town repos in one session, no protocol defines: whether to branch per-town-touched, how to sequence commits across repos, or how session dumps reference cross-repo work. |
 | **World/county scope branch rules** | Town scope: branch lifecycle (plan/activate/retire). World/county scope: coordination artifacts (`TODO.md`, `DONE.md`, session dumps). Current working assumption: no branch needed at world root for coordination artifacts; branch per-town when making town changes within a world-scope session. Needs codification. |
