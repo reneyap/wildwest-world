@@ -13,9 +13,9 @@
 | # | Item | Area | Why Now |
 |---|---|---|---|
 | 1 | **Resolve identity block shape** | Open Decision | Blocking town registry template + `TownInit.ts` fix |
-| 2 | **Fix `SoloModeController.hasBranchDoc()` path** | wildwest-vscode | T2 solo mode is fully broken for all compliant towns |
-| 3 | **Add `scope: "town"` to wildwest-vscode `.wildwest/registry.json`** | wildwest-vscode | Own town not canonically detected without it |
-| 4 | **Add cold-start checklist to wildwest-framework CLAUDE.md** | wwFramework | Every actor opening that workspace starts blind |
+| 2 | **`feat/actor-scope-display`** | wildwest-vscode | Scope determines valid roles → gates everything: solo mode, commands, status bar |
+| 3 | **Add `scope: "town"` to wildwest-vscode `.wildwest/registry.json`** | wildwest-vscode | Prerequisite for actor-scope-display; own town not canonically detected without it |
+| 4 | **Fix `SoloModeController.hasBranchDoc()` path** | wildwest-vscode | T2 solo mode fully broken — unblock after actor-scope-display lands |
 | 5 | **Fix `TownInit.ts` — write `scope` field** | wildwest-vscode | Depends on #1; every future town bootstrapped by initTown has the gap |
 
 ---
@@ -133,8 +133,22 @@
 
 | Item | Detail |
 |---|---|
-
 | **wildwest-ai county CLAUDE.md** | References `~/counties/` paths and may use `wwWorld` — audit + update |
+
+---
+
+### Solo Mode Trigger — Assigned to TM(RHk)
+
+> Assignment memo: `20260505-1803Z-to-TM(RHk).Cld-from-RA(RSn).Cpt--assignment-solo-mode-trigger.md`
+> Branch: `feat/solo-mode-trigger`
+
+| # | Item | Detail |
+|---|---|---|
+| 1 | **`onBeat` callback on HeartbeatMonitor** | Wire town beat → SoloModeController |
+| 2 | **`SoloModeController.enterSoloMode()` / `exitSoloMode()`** | Write `solo-mode-active` memo to telegraph; Tier 1 archival on beat |
+| 3 | **Inactivity auto-trigger** | VSCode activity listeners → 15 min default (`wildwest.soloMode.inactivityThresholdMs`) |
+| 4 | **`wildwest.stepAway` / `wildwest.returnFromAway` commands** | Explicit entry/exit commands |
+| 5 | **Status bar solo indicator** | Show `$(radio-tower) Solo` when active |
 
 ---
 
@@ -155,17 +169,44 @@
 | **Clean up legacy staged/*.json flat files** | 260 old flat session files remain in `staged/` alongside new `packets/` + `storage/`. Verify backfill complete, then delete. |
 | **Confirm 183-duplicate export bug resolved** | Session `7c4dfc56` (May 3) exported 183 identical packets — confirmed bug (session `3ecc35f4`). Verify v0.14.0 delta pipeline resolves duplication, or open `fix/session-export-dedup`. |
 
-### Actor Display — Registry-Driven
+### feat/actor-scope-display — Priority 1
 
-> Design settled 2026-05-05: registry is SSOT for valid actors per town; VSCode setting declares which actor THIS window is; extension cross-references + displays in status bar.
+> **Decision 2026-05-05 (RA(RSn).Cpt):** Scope is derived from workspace root registry (`scope` field → `town | county | territory`). Valid roles cascade from scope. `wildwest.actor` setting declares which role THIS window plays. Extension cross-references, validates, and gates commands. This feature precedes `feat/solo-mode-trigger` — scope gates what the devPair can do.
+>
+> Status bar target: `● RA(RSn) · territory` — scope shown explicitly on every window.
 
-| # | Item | Detail |
+**Scope → valid roles mapping:**
+
+| Workspace scope | Valid roles |
+|---|---|
+| `territory` | G, RA |
+| `county` | S, CD, TM |
+| `town` | Mayor, TM, HG |
+
+**Implementation tasks (TM to implement):**
+
+| # | File | Change |
 |---|---|---|
-| 1 | **Add `actors` block to town registry schema** | Town registry should declare valid actors by role: `mayor`, `marshal`, `cd` — each with `code`, `username`, `channel`. Source of truth for role validation. Ties into identity block shape decision — resolve together. Reference: ICA `authors` array. |
-| 2 | **Add `wildwest.actor` VSCode setting** | Declares which actor THIS window is (e.g. `"TM(RHk)"`). Extension cross-references against registry `actors` block to validate. Each window sets its own — supports multiple windows on same town simultaneously. |
-| 3 | **Display active actor in status bar** | Add actor/role to existing status bar item: e.g. `● TM(RHk) · main · T1`. One glance identifies who this window is. |
-| 4 | **Role-awareness warning** | If `wildwest.actor = TM(RHk)` and user invokes a CD-scope command (e.g. lifecycle script), extension warns: "This action is outside TM scope." Tooling complement to the framework honor-system. Supersedes backlog item of same name. |
-| 5 | **Add `actors` block to world registry** | World registry (`~/wildwest/.wildwest/registry.json`) should declare G and RA actors — consistent with the cascading pattern. Currently missing. |
+| 1 | `HeartbeatMonitor.ts` | `detectScope(workspaceRoot)` — read `.wildwest/registry.json`, return `scope` field; cache it; expose as `currentScope` getter |
+| 2 | `extension.ts` | On activate: call `detectScope()`; derive valid roles for that scope; store as `activeScope` |
+| 3 | `package.json` | Add `wildwest.actor` string setting (e.g. `"RA(RSn)"`); add per-scope role lists to `configuration` |
+| 4 | `extension.ts` | Validate `wildwest.actor` against valid roles for `activeScope`; show warning if mismatch |
+| 5 | Status bar | Show `● <actor> · <scope>` (e.g. `● RA(RSn) · territory`); update on config change |
+| 6 | Commands | Gate town-scoped commands (e.g. `initTown`, lifecycle scripts) — warn if invoked from county/territory scope window without explicit town path arg |
+| 7 | `registry.json` schemas | Add `actors` block to town + world registry — valid actors per scope; shape: `{ role, code, devPair, channel }` |
+
+**Done criteria:**
+- [ ] Status bar shows `● <actor> · <scope>` for all three scope levels
+- [ ] `wildwest.actor` setting validates against detected scope; warning shown on mismatch
+- [ ] Territory window: G + RA roles valid; TM/HG roles warn
+- [ ] Town window: Mayor/TM/HG valid; G/RA warn
+- [ ] Town-scoped commands warn when invoked from territory/county window
+- [ ] `feat/solo-mode-trigger` assignment memo updated: scope-aware solo mode (territory scope → G/RA autonomy tier; town scope → TM autonomy tier)
+- [ ] Draft PR to `wildwest-ai/wildwest-vscode`
+
+**Dependencies:** `scope` field must exist in `.wildwest/registry.json` (Now item #3 — add manually to wildwest-vscode registry before TM starts impl)
+
+**CD coordination required:** `feat/*` branch → CD scope approval before TM activates. Memo sent: `20260505-1810Z-to-CD(RSn).Cld-from-RA(RSn).Cpt--coordination-two-features-wildwest-vscode.md`. CD confirms scope→roles mapping, approves branch activation, assigns TM, and clarifies PR gate.
 
 ### Near-term
 
