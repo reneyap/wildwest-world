@@ -1,7 +1,7 @@
 # Wild West — TODO
 
 > **Created:** 2026-04-30 12:17 UTC
-> **Last updated:** 20260505-0219Z (22:19 EDT)
+> **Last updated:** 20260505-0224Z (22:24 EDT)
 > **Scope:** Cross-county planning — not committed to any repo
 
 ---
@@ -146,6 +146,18 @@
 | 4 | **Update `HeartbeatMonitor.beatCounty()`** | Replace `t.path` read with `path.join(worldRoot, countiesDir, countyAlias, t.alias)` |
 | 5 | **Update `HeartbeatMonitor.beatWorld()`** | Replace `c.path` read with `path.join(worldRoot, countiesDir, c.alias)` |
 | 6 | **Remove `path` fields from world + county registries** | After extension ships the setting; world registry stays gitignored; county registry becomes committable. |
+
+### Actor Display — Registry-Driven
+
+> Design settled 2026-05-05: registry is SSOT for valid actors per town; VSCode setting declares which actor THIS window is; extension cross-references + displays in status bar.
+
+| # | Item | Detail |
+|---|---|---|
+| 1 | **Add `actors` block to town registry schema** | Town registry should declare valid actors by role: `mayor`, `marshal`, `cd` — each with `code`, `username`, `channel`. Source of truth for role validation. Ties into identity block shape decision — resolve together. Reference: ICA `authors` array. |
+| 2 | **Add `wildwest.actor` VSCode setting** | Declares which actor THIS window is (e.g. `"TM(RHk)"`). Extension cross-references against registry `actors` block to validate. Each window sets its own — supports multiple windows on same town simultaneously. |
+| 3 | **Display active actor in status bar** | Add actor/role to existing status bar item: e.g. `● TM(RHk) · main · T1`. One glance identifies who this window is. |
+| 4 | **Role-awareness warning** | If `wildwest.actor = TM(RHk)` and user invokes a CD-scope command (e.g. lifecycle script), extension warns: "This action is outside TM scope." Tooling complement to the framework honor-system. Supersedes backlog item of same name. |
+| 5 | **Add `actors` block to world registry** | World registry (`~/wildwest/.wildwest/registry.json`) should declare G and RA actors — consistent with the cascading pattern. Currently missing. |
 
 ### Near-term
 
