@@ -1,5 +1,5 @@
 {
-  "scope": "world",
+  "scope": "territory",
   "schema_version": "2",
   "_schema_note": "v2: no 'path' fields (derived from alias + worldRoot config); 'name' renamed to 'alias'",
   "framework": "wildwest-framework",
